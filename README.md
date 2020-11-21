@@ -1,6 +1,4 @@
-# formBuilder
-1-Validators
-2-asyncValidators
+# FormArrayName and FormBuilder and asyncValidators in angular 10 validation
 
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 10.0.0.
