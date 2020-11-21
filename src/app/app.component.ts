@@ -36,17 +36,27 @@ export class AppComponent implements OnInit {
             ),
           ],
         ],
-        email: ["", {updateOn: 'blur',validators:[Validators.required, Validators.email], asyncValidators: EmailMustIn(["abdalla@yahoo.com", "abdalla@gmail.com"])}],
+        email: [
+          "",
+          {
+            updateOn: "blur",
+            validators: [Validators.required, Validators.email],
+            asyncValidators: EmailMustIn([
+              "abdalla@yahoo.com",
+              "abdalla@gmail.com",
+            ]),
+          },
+        ],
         password: ["", [Validators.required, Validators.minLength(6)]],
         confirmPassword: ["", Validators.required],
-        hobbies: new FormArray([]),
+        hobbies: this.formBuilder.array([]),
         acceptTerms: [false, Validators.requiredTrue],
       },
       {
         validator: [
           MustMatch("password", "confirmPassword"),
           MustIn("firstName", ["chris", "Anna"]),
-        ]
+        ],
       }
     );
   }
@@ -67,7 +77,8 @@ export class AppComponent implements OnInit {
   // }
 
   onAddHobby(): void {
-    const form = new FormControl(null, Validators.required);
+    // const form = new FormControl(null, Validators.required);
+    const form = this.formBuilder.control("", Validators.required);
     (this.registerForm.controls["hobbies"] as FormArray).push(form);
   }
 
