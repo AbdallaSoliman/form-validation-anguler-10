@@ -17,7 +17,9 @@ import { MustMatch } from "./_helpers/must-match.validator";
 export class AppComponent implements OnInit {
   registerForm: FormGroup;
   submitted = false;
-  forbidenUsernames = ["chris", "Anna"];
+  savedEmails = ["abdalla@yahoo.com", "abdalla@gmail.com"];
+  savedNames = ["chris", "Anna"];
+
   constructor(private formBuilder: FormBuilder) {}
 
   ngOnInit() {
@@ -41,10 +43,7 @@ export class AppComponent implements OnInit {
           {
             updateOn: "blur",
             validators: [Validators.required, Validators.email],
-            asyncValidators: EmailMustIn([
-              "abdalla@yahoo.com",
-              "abdalla@gmail.com",
-            ]),
+            asyncValidators: EmailMustIn(this.savedEmails),
           },
         ],
         password: ["", [Validators.required, Validators.minLength(6)]],
@@ -55,7 +54,7 @@ export class AppComponent implements OnInit {
       {
         validator: [
           MustMatch("password", "confirmPassword"),
-          MustIn("firstName", ["chris", "Anna"]),
+          MustIn("firstName", this.savedNames),
         ],
       }
     );
@@ -70,12 +69,6 @@ export class AppComponent implements OnInit {
   get controls() {
     return (this.registerForm.controls["hobbies"] as FormArray).controls;
   }
-  // createItem(): FormControl {
-  // return this.formBuilder.group({
-  //   name: ['', Validators.required]
-  // });
-  // }
-
   onAddHobby(): void {
     // const form = new FormControl(null, Validators.required);
     const form = this.formBuilder.control("", Validators.required);
@@ -86,14 +79,17 @@ export class AppComponent implements OnInit {
     this.submitted = true;
 
     // stop here if form is invalid
-    if (this.registerForm.pending || this.registerForm.invalid) {
+    if (!this.registerForm.valid) {
       return;
     }
+    this.savedEmails.push(this.registerForm.value["email"]);
+    this.savedNames.push(this.registerForm.value["firstName"]);
 
     // display form values on success
     alert(
       "SUCCESS!! :-)\n\n" + JSON.stringify(this.registerForm.value, null, 4)
     );
+    this.onReset();
   }
 
   onReset() {

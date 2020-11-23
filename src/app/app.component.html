@@ -6,7 +6,7 @@
       <div class="form-row">
         <div class="form-group col">
           <label>Title</label>
-          <select formControlName="title" class="form-control"
+          <select formControlName="title" class="form-control" autocomplete="honorific-prefix"
             [ngClass]="{ 'is-invalid': submitted && f.title.errors }">
             <option value=""></option>
             <option value="Mr">Mr</option>
@@ -20,16 +20,16 @@
         </div>
         <div class="form-group col-5">
           <label>First Name</label>
-          <input type="text" formControlName="firstName" class="form-control"
+          <input type="text" formControlName="firstName" class="form-control" autocomplete="given-name"
             [ngClass]="{ 'is-invalid': submitted && f.firstName.errors }" />
           <div *ngIf="submitted && f.firstName.errors" class="invalid-feedback">
             <div *ngIf="f.firstName.errors.required">First Name is required</div>
-            <div *ngIf="f.firstName.errors.mustIn">First Name must in chris, Anna</div>
+            <div *ngIf="f.firstName.errors.mustIn">This name userd before</div>
           </div>
         </div>
         <div class="form-group col-5">
           <label>Last Name</label>
-          <input type="text" formControlName="lastName" class="form-control"
+          <input type="text" formControlName="lastName" class="form-control" autocomplete="family-name"
             [ngClass]="{ 'is-invalid': submitted && f.lastName.errors }" />
           <div *ngIf="submitted && f.lastName.errors" class="invalid-feedback">
             <div *ngIf="f.lastName.errors.required">Last Name is required</div>
@@ -39,7 +39,7 @@
       <div class="form-row">
         <div class="form-group col">
           <label>Date of Birth</label>
-          <input type="date" formControlName="dob" class="form-control"
+          <input type="date" formControlName="dob" class="form-control" autocomplete="bday"
             [ngClass]="{ 'is-invalid': submitted && f.dob.errors }" />
           <div *ngIf="submitted && f.dob.errors" class="invalid-feedback">
             <div *ngIf="f.dob.errors.required">Date of Birth is required</div>
@@ -48,7 +48,7 @@
         </div>
         <div class="form-group col">
           <label>Email</label>
-          <input type="text" formControlName="email" class="form-control"
+          <input type="text" formControlName="email" class="form-control" autocomplete="email"
             [ngClass]="{ 'is-invalid': submitted && f.email.errors }" />
           <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
             <div *ngIf="f.email.errors.required">Email is required</div>
@@ -60,7 +60,7 @@
       <div class="form-row">
         <div class="form-group col">
           <label>Password</label>
-          <input type="password" formControlName="password" class="form-control"
+          <input type="password" formControlName="password" class="form-control" autocomplete="new-password"
             [ngClass]="{ 'is-invalid': submitted && f.password.errors }" />
           <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
             <div *ngIf="f.password.errors.required">Password is required</div>
@@ -69,7 +69,7 @@
         </div>
         <div class="form-group col">
           <label>Confirm Password</label>
-          <input type="password" formControlName="confirmPassword" class="form-control"
+          <input type="password" formControlName="confirmPassword" class="form-control" autocomplete="new-password"
             [ngClass]="{ 'is-invalid': submitted && f.confirmPassword.errors }" />
           <div *ngIf="submitted && f.confirmPassword.errors" class="invalid-feedback">
             <div *ngIf="f.confirmPassword.errors.required">Confirm Password is required</div>
@@ -79,32 +79,34 @@
       </div>
       <!-- <div class="form-row"> -->
 
-        <div formArrayName="hobbies">
-          <div class="form-group col">
-            <h4>Your Hobbies</h4>
-            <button class="btn btn-primary" type="button" (click)="onAddHobby()"> Add Hobby </button>
-          </div>
-          <div class="form-group col" >
-            <div  *ngFor="let hobbyControl of f.hobbies.controls; let i=index">
-              <input [formControlName]="i" type="text" class="form-control"
+      <div formArrayName="hobbies">
+        <div class="form-group col">
+          <h4>Your Hobbies</h4>
+          <button class="btn btn-primary" type="button" (click)="onAddHobby()"> Add Hobby </button>
+        </div>
+        <div class="form-group col">
+          <div *ngFor="let hobbyControl of f.hobbies.controls; let i=index">
+            <input [formControlName]="i" type="text" class="form-control"
               [ngClass]="{ 'is-invalid': submitted && hobbyControl.errors }" />
-              <div *ngIf="submitted" class="invalid-feedback" >Enter your hobbies</div>
+            <div *ngIf="submitted && hobbyControl.errors" class="invalid-feedback">
+              <div *ngIf="hobbyControl.errors.required">Enter your hobbies</div>
             </div>
+          </div>
 
         </div>
       </div>
       <!--  </div>   -->
-  <div class="form-group form-check">
-    <input type="checkbox" formControlName="acceptTerms" id="acceptTerms" class="form-check-input"
-      [ngClass]="{ 'is-invalid': submitted && f.acceptTerms.errors }" />
-    <label for="acceptTerms" class="form-check-label">Accept Terms & Conditions</label>
-    <div *ngIf="submitted && f.acceptTerms.errors" class="invalid-feedback">Accept Ts & Cs is required</div>
-  </div>
+      <div class="form-group form-check">
+        <input type="checkbox" formControlName="acceptTerms" id="acceptTerms" class="form-check-input"
+          [ngClass]="{ 'is-invalid': submitted && f.acceptTerms.errors }" />
+        <label for="acceptTerms" class="form-check-label">Accept Terms & Conditions</label>
+        <div *ngIf="submitted && f.acceptTerms.errors" class="invalid-feedback">Accept Ts & Cs is required</div>
+      </div>
 
-  <div class="text-center">
-    <button class="btn btn-primary mr-1">Register</button>
-    <button class="btn btn-secondary" type="reset" (click)="onReset()">Cancel</button>
+      <div class="text-center">
+        <button class="btn btn-primary mr-1">Register</button>
+        <button class="btn btn-secondary" type="reset" (click)="onReset()">Cancel</button>
+      </div>
+    </form>
   </div>
-  </form>
-</div>
 </div>
