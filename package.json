@@ -2,6 +2,7 @@
   "name": "angular-validator",
   "version": "0.0.0",
   "scripts": {
+    "heroku-postbuild": "ng build --prod",
     "ng": "ng",
     "start": "node server.js",
     "build": "ng build",
@@ -24,7 +25,10 @@
     "rxjs": "6.6.3",
     "rxjs-compat": "^6.6.3",
     "tslib": "^2.0.3",
-    "zone.js": "^0.11.3"
+    "zone.js": "^0.11.3",
+    "@angular/compiler-cli": "^11.0.0",
+    "typescript": "4.0.5",
+    "@angular/cli": "^11.0.1"
   },
   "devDependencies": {
     "@angular/compiler-cli": "^11.0.0",
@@ -46,5 +50,8 @@
     "protractor": "~7.0.0",
     "ts-node": "~9.0.0",
     "tslint": "~5.20.1"
+  },"engines": {
+    "node": "6.11.0",
+    "npm": "3.10.10"
   }
 }
