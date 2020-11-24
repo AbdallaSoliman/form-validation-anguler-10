@@ -85,7 +85,7 @@
           <button class="btn btn-primary" type="button" (click)="onAddHobby()"> Add Hobby </button>
         </div>
         <div class="form-group col">
-          <div *ngFor="let hobbyControl of f.hobbies.controls; let i=index">
+          <div *ngFor='let hobbyControl of f.hobbies.controls; let i=index' >
             <input [formControlName]="i" type="text" class="form-control"
               [ngClass]="{ 'is-invalid': submitted && hobbyControl.errors }" />
             <div *ngIf="submitted && hobbyControl.errors" class="invalid-feedback">

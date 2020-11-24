@@ -13,7 +13,7 @@ import { MustIn } from "./_helpers/must-in.validator";
 // import custom validator to validate that password and confirm password fields match
 import { MustMatch } from "./_helpers/must-match.validator";
 
-@Component({ selector: "app-root", templateUrl: "app.component.html" })
+@Component({ selector: "app-root", templateUrl: 'app.component.html' })
 export class AppComponent implements OnInit {
   registerForm: FormGroup;
   submitted = false;
